@@ -1,0 +1,11 @@
+.header {
+    background: var(--gray-900);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    height: 200px;
+    width: 100%;
+    
+    gap: 1.3rem;
+}
