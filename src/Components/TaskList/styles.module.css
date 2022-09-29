@@ -21,19 +21,12 @@
     border-radius: 8px;
 }
 
-.checkbox{
-    width: 24px;
-    height: 24px;
-    -webkit-appearance: none;
-    
-    border: 2px solid var(--blue-dark);
-    border-radius: 13px;
-}
-
 .taskContent button {
     border: 0;
     color: var(--gray-300);
     background: transparent;
+    margin-top: 11px;
+
 
     cursor: pointer;
     line-height: 0;
@@ -45,12 +38,5 @@
 }
 
 .taskContent p {
-   margin-bottom: 1rem;
-}
-
-.header header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
+   margin-top: 11px;
 }

@@ -39,27 +39,12 @@ export function NewTask() {
     setTasks(newTaks)
   }
 
-  function toggleTaskCompletion(taskId: string) {
-    setTasks((state) => {
-      return state.map((taskItem) => {
-        if (taskItem.title === taskId) {
-          return {
-            ...taskItem,
-            isCompleted: !taskItem.isComplete,
-          };
-        }
-        return taskItem;
-      });
-    });
-  }
-
 
   const isInputTaskEmpty = newTaks.length === 0;
 
   const tasksQuantity = tasks.length;
 
   const completedTasks = tasks.filter((task) => task.isComplete).length;
-  console.log(completedTasks)
 
   return (
     <div className={styles.container}>
@@ -104,9 +89,9 @@ export function NewTask() {
         {tasks.map((task) => {
           return <TaskList
             key={task.id}
-            content={task.title}
+            task={task.title}
+            isComplete={task.isComplete}
             onDeleteTask={deleteTask}
-            onCompleted={toggleTaskCompletion}
           />
         })}
       </div>

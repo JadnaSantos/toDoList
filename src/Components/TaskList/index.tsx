@@ -1,20 +1,15 @@
 import styles from './styles.module.css'
-import { CheckCircle, Trash } from 'phosphor-react';
+import { Check, CheckCircle, Trash } from 'phosphor-react';
 
 interface TaskProps {
-    content: string;
+    task: string;
+    isComplete?: boolean;
     onDeleteTask: (task: string) => void;
-    onCompleted: (task: string) => void;
 }
 
-export function TaskList({ content, onDeleteTask, onCompleted }: TaskProps) {
-
-    function handleCheckChange() {
-        onCompleted(content);
-    }
-
+export function TaskList({ task, onDeleteTask }: TaskProps) {
     function handleDeleteTask() {
-        onDeleteTask(content)
+        onDeleteTask(task)
     }
 
     return (
@@ -22,14 +17,12 @@ export function TaskList({ content, onDeleteTask, onCompleted }: TaskProps) {
 
             <div className={styles.taskBox}>
                 <div className={styles.taskContent}>
-                    <input
-                        className={styles.checkbox}
-                        type="checkbox"
-                        checked={true}
-                        onClick={() => handleCheckChange()}
-                    />
+                    <button
+                    >
+                        <CheckCircle size={32} />
+                    </button>
 
-                    <p>{content}</p>
+                    <p>{task}</p>
                     <button
                         onClick={handleDeleteTask}
                     >
