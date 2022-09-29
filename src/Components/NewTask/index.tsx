@@ -1,16 +1,12 @@
-import { ClipboardText, PlusCircle } from 'phosphor-react'
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
-import { TaskList } from '../TaskList';
+import { PlusCircle } from 'phosphor-react'
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { v4 as uuid } from 'uuid';
+import { TaskTypes } from '../../@types';
+import { useTask } from '../../contexts/useTaskContextProvider';
 import styles from './styles.module.css'
 
-export interface Task {
-  id: string;
-  title: string;
-  isComplete: boolean;
-}
-
 export function NewTask() {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const { tasks, setTasks } = useTask();
   const [newTaks, setNewTask] = useState('')
 
   function handleCreateNewTask(event: FormEvent) {
@@ -19,7 +15,7 @@ export function NewTask() {
     setTasks([
       ...tasks,
       {
-        id: crypto.randomUUID(),
+        id: uuid(),
         title: newTaks,
         isComplete: false
       }
@@ -28,83 +24,30 @@ export function NewTask() {
     setNewTask('');
   }
 
-  function handleNewTaksChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleChangeTaskInput(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('')
-    setNewTask(event.target.value)
+    setNewTask(event.target.value);
   }
-
-  function deleteTask(taskId: string) {
-    const newTaks = tasks.filter((task) => task.title !== taskId)
-
-    setTasks(newTaks)
-  }
-
-
-  const isInputTaskEmpty = newTaks.length === 0;
-
-  const tasksQuantity = tasks.length;
-
-  const completedTasks = tasks.filter((task) => task.isComplete).length;
 
   return (
-    <div className={styles.container}>
-      <form
-        className={styles.content}
-        onSubmit={handleCreateNewTask}
+    <form
+      className={styles.content}
+      onSubmit={handleCreateNewTask}
+    >
+      <input
+        type="text"
+        required
+        value={newTaks}
+        className={styles.input}
+        onChange={handleChangeTaskInput}
+        placeholder="Adicione uma nova tarefa"
+      />
+      <button
+        type="submit"
+        className={styles.button}
       >
-        <input
-          className={styles.input}
-          type="text"
-          value={newTaks}
-          required
-          placeholder="Adicione uma nova tarefa"
-          onChange={handleNewTaksChange}
-        />
-        <button
-          type="submit"
-          className={styles.button}
-          disabled={isInputTaskEmpty}
-        >
-          Criar <PlusCircle size={20} />
-        </button>
-      </form>
-
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <div>
-            <p>Tarefas criadas</p>
-            <span>{tasksQuantity}</span>
-          </div>
-
-          <div>
-            <p className={styles.textPurple}>Concluídas</p>
-            <span>
-              {completedTasks} de {tasksQuantity}
-            </span>
-          </div>
-        </header>
-      </div>
-
-      <div className={styles.list}>
-        {tasks.map((task) => {
-          return <TaskList
-            key={task.id}
-            task={task.title}
-            isComplete={task.isComplete}
-            onDeleteTask={deleteTask}
-          />
-        })}
-      </div>
-
-      {tasks.length <= 0 && (
-        <div className={styles.emptyTask}>
-          <ClipboardText size={70} />
-          <div>
-            <p>Você ainda não tem tarefas cadastradas</p>
-            <span>Crie tarefas e organize seus itens a fazer</span>
-          </div>
-        </div>
-      )}
-    </div>
+        Criar <PlusCircle size={20} />
+      </button>
+    </form>
   )
 }

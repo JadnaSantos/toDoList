@@ -1,38 +1,27 @@
-.container{
-    padding: 0 1rem;
-    width: 100%;
-    max-width: 116rem;
-    margin: 0 auto;
-
-}
-
 .content {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
 
+    justify-content: center;
     align-items: center;
-    gap: 1.3rem;
+    gap: 1.5rem;
 
     transform: translateY(-50%);
 }
   
-.input {
+input {
     flex: 1;
-    padding: 16px;
     border-radius: 8px;
+    padding: 1rem;
     border: 1px solid var(--purple-dark);
     
     background-color: var(--gray-400);
+    outline: none;
     color: var(--white);
-    font-weight: bold;
+}
 
-}
-  
-.input::placeholder {
-    color: var(--gray-300);
-}
-  
+
 .button {
     color: var(--gray-100);
     background: var(--blue-dark);
@@ -47,7 +36,7 @@
     padding: 1rem;
     cursor: pointer;
 
-    transition: background 0.1s;
+    transition: background-color 0.15s;
 }
 
 .completed {
