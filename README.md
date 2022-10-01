@@ -1,6 +1,6 @@
 ### todoList
 
-### in progress 🚧
+### in Progress 🚧
 
 To do list desenvolvida seguindo o layout criado para o curso Ignite da Rocketseat.
 
